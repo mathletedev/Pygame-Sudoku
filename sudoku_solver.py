@@ -4,6 +4,7 @@ from copy import deepcopy
 class Solver:
   def __init__(self, board):
     self.board = board
+    self.timer = None
 
   def solve(self):
     tmp = deepcopy(self.board)
@@ -57,23 +58,8 @@ class Solver:
 
     return ("\n" + "-" * 33 + "\n").join(joined)
 
-board = [
-  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-]
+  def start_timer(self):
+    self.timer = round(time() * 1000)
 
-solver = Solver(board)
-
-current = round(time() * 1000)
-res = solver.solve()
-after = round(time() * 1000) - current
-
-print(solver.parse_board(res))
-print("Solved in " + str(after) + "ms")
+  def get_time(self):
+    return round(time() * 1000) - self.timer
