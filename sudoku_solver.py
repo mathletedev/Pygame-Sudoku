@@ -67,3 +67,25 @@ class Solver:
 
   def get_time(self):
     return round(time() * 1000) - self.timer
+
+if __name__ == "__main__":
+  board = [
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  ]
+
+  solver = Solver(board)
+
+  solver.start_timer()
+  res = solver.solve()
+  current = solver.get_time()
+
+  print(solver.parse_board(res))
+  print("Solved in " + str(current) + "ms")
