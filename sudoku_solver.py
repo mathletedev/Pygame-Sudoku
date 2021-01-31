@@ -13,12 +13,14 @@ class Solver:
     direction = 1
 
     while True:
-      if (pointer < 0): return None
+      if (pointer < 0):
+        return None
 
       pos_x = pointer % 9
       pos_y = pointer // 9
 
-      if (pointer > len(tmp) ** 2 - 1): return tmp
+      if (pointer > len(tmp) ** 2 - 1):
+        return tmp
 
       if (self.board[pos_y][pos_x] > 0):
         pointer += direction
@@ -39,14 +41,16 @@ class Solver:
 
   def valid(self, tmp, num, pos):
     for i in range(len(self.board)):
-      if (tmp[pos[1]][i] == num or tmp[i][pos[0]] == num): return False
+      if (tmp[pos[1]][i] == num or tmp[i][pos[0]] == num):
+        return False
 
     box_x = pos[0] // 3
     box_y = pos[1] // 3
 
     for i in range(box_y * 3, box_y * 3 + 3):
       for j in range(box_x * 3, box_x * 3 + 3):
-        if (tmp[i][j] == num): return False
+        if (tmp[i][j] == num):
+          return False
 
     return True
 
