@@ -2,9 +2,10 @@ from time import time
 from copy import deepcopy
 
 class Solver:
-  def __init__(self, board):
+  def __init__(self, board, GUI=None):
     self.board = board
     self.timer = None
+    self.GUI = GUI
 
   def solve(self):
     tmp = deepcopy(self.board)
