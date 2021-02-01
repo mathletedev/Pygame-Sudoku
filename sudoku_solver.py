@@ -17,26 +17,30 @@ class Solver:
       if (pointer < 0):
         return None
 
-      pos_x = pointer % 9
-      pos_y = pointer // 9
+      row = pointer // 9
+      col = pointer % 9
 
       if (pointer > len(tmp) ** 2 - 1):
         return tmp
 
-      if (self.board[pos_y][pos_x] > 0):
+      if (self.board[row][col] > 0):
         pointer += direction
         continue
 
-      if tmp[pos_y][pos_x] < 9:
-        if self.valid(tmp, tmp[pos_y][pos_x] + 1, (pos_x, pos_y)):
-          tmp[pos_y][pos_x] += 1
+      if tmp[row][col] < 9:
+        if self.valid(tmp, tmp[row][col] + 1, (col, row)):
+          tmp[row][col] += 1
+          self.redraw_box(tmp, row, col)
+
           pointer += 1
           direction = 1
           continue
 
-        tmp[pos_y][pos_x] += 1
+        tmp[row][col] += 1
       else:
-        tmp[pos_y][pos_x] = 0
+        tmp[row][col] = 0
+        self.redraw_box(tmp, row, col)
+          
         pointer -= 1
         direction = -1
 
@@ -54,6 +58,14 @@ class Solver:
           return False
 
     return True
+
+  def redraw_box(self, tmp, row, col):
+    if not self.GUI is None:
+      self.GUI.board = tmp
+      self.GUI.boxes[row][col].set_value(tmp[row][col])
+      self.GUI.boxes[row][col].redraw()
+      self.GUI.draw_lines()
+      self.GUI.sleep(10)
 
   def parse_board(self, board):
     joined = []
