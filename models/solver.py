@@ -1,5 +1,6 @@
 from time import time
 from copy import deepcopy
+import pygame
 
 class Solver:
   def __init__(self, board, GUI=None):
@@ -14,8 +15,13 @@ class Solver:
     direction = 1
 
     while True:
+      if self.GUI:
+        for event in pygame.event.get():
+          if event.type == pygame.QUIT:
+            return "QUIT"
+
       if (pointer < 0):
-        return None
+        return "IMPOSSIBLE"
 
       row = pointer // 9
       col = pointer % 9
