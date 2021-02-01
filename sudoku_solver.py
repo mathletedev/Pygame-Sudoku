@@ -28,7 +28,7 @@ class Solver:
         continue
 
       if tmp[row][col] < 9:
-        if self.valid(tmp, tmp[row][col] + 1, (col, row)):
+        if self.valid(tmp, tmp[row][col] + 1, row, col):
           tmp[row][col] += 1
           self.redraw_box(tmp, row, col)
 
@@ -44,13 +44,13 @@ class Solver:
         pointer -= 1
         direction = -1
 
-  def valid(self, tmp, num, pos):
+  def valid(self, tmp, num, row, col):
     for i in range(len(self.board)):
-      if (tmp[pos[1]][i] == num or tmp[i][pos[0]] == num):
+      if (tmp[row][i] == num or tmp[i][col] == num):
         return False
 
-    box_x = pos[0] // 3
-    box_y = pos[1] // 3
+    box_x = col // 3
+    box_y = row // 3
 
     for i in range(box_y * 3, box_y * 3 + 3):
       for j in range(box_x * 3, box_x * 3 + 3):
